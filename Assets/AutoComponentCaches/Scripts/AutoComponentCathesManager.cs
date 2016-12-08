@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -141,16 +142,24 @@ namespace AutoComponentCathes
 		private static Dictionary<string, Object[]> findObjectsList = new Dictionary<string, Object[]>();
 
 		//コンポーネントごとのハッシュ値計算(GetComponent用)
+		//現在のシーン・UnityEngineが生成するゲームオブジェクトのハッシュ・コンポーネント名からハッシュを生成
 		private static string GetComponentHashForGetComponent(GameObject behaviour, System.Type type)
 		{
+			string scenePath = SceneManager.GetActiveScene().path;
+			string objectHash = behaviour.GetInstanceID().ToString();
+
 			//~はクラス名に使えないのでハッシュ値被り防止のために使用。
-			string str = behaviour.GetInstanceID().ToString() + "~" + type.Name;
+			string str = scenePath +"~" + objectHash + "~" + type.Name;
 			return str;
 		}
 		//コンポーネントごとのハッシュ値計算(FindObject用)
+		//現在のシーン・コンポーネント名からハッシュを生成
 		private static string GetComponentHashForFindObject(System.Type type)
 		{
-			string str = type.Name;
+			string scenePath = SceneManager.GetActiveScene().path;
+
+			//~はクラス名に使えないのでハッシュ値被り防止のために使用。
+			string str = scenePath +"~"+type.Name;
 			return str;
 		}
 
