@@ -1,4 +1,4 @@
-#AutoComponentCathes
+# AutoComponentCathes
 ---
 GetComponent,<br>
 FindObjectOfType,<br>
@@ -40,7 +40,7 @@ private SpriteRenderer sp { get { return this.AutoGetComponent<SpriteRenderer>()
 ---
 
 
-##サンプルコード
+## サンプルコード
 ```
 using UnityEngine;
 using System.Collections;
@@ -69,9 +69,9 @@ public class AutoComponentCathesTest : MonoBehaviour
 ---
 
 
-##比較
+## 比較
 
-###コード1:毎回GetComponent
+### コード1:毎回GetComponent
 
 ```
 
@@ -89,7 +89,7 @@ public class AutoComponentCathesTest : MonoBehaviour
 ```
 ⇛毎回GetComponentを呼ぶので処理が重い
 
-###コード2:Start(Awake)でキャッシュ
+### コード2:Start(Awake)でキャッシュ
 
 ```
 	public SpriteRenderer sp;
@@ -107,7 +107,7 @@ public class AutoComponentCathesTest : MonoBehaviour
 	}
 ```
 ⇛コード1に比べて、Componentがキャッシュされて早くなるが、他のオブジェクトからの参照が自分のStart(Awake)よりも先だとNullを吐く
-###コード3:プロパティを使う
+### コード3:プロパティを使う
 
 ```
 	private SpriteRenderer _sp
@@ -136,7 +136,7 @@ public class AutoComponentCathesTest : MonoBehaviour
 ```
 ⇛コード2におけるnullの問題がなくなったが冗長。
 
-###コード4:AutoGetComponetを使う
+### コード4:AutoGetComponetを使う
 ```
 	public SpriteRenderer sp { get { return this.AutoGetComponent<SpriteRenderer>(); } }
 
@@ -156,7 +156,7 @@ public class AutoComponentCathesTest : MonoBehaviour
 
 ---
 
-##使い方
+## 使い方
 <br>
 unitypackageを導入して、用いるクラスに
 
@@ -167,6 +167,6 @@ using AutoComponentCathes;
 
 ---
 
-##バージョン情報
+## バージョン情報
 ver1.0.1 Scene切替時に、別のシーンに同じクラスがあるとうまく動作しない不具合を修正(マルチシーンには非対応)<br>
 ver1.0.0 リリース
